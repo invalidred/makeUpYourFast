@@ -2,16 +2,17 @@ angular.module('makeupYourFast.controllers')
 .controller('calculateController', function($scope, $ionicModal) {
   
   $scope.daysToFast = [
-    { weekDay: 'Monday', checked: false },
-    { weekDay: 'Tuesday', checked: false },
-    { weekDay: 'Wednesday', checked: false },
-    { weekDay: 'Thursday', checked: false },
-    { weekDay: 'Friday', checked: false },
-    { weekDay: 'Saturday', checked: false },
-    { weekDay: 'Sunday', checked: false },
+    { id: 0, weekDay: 'Sunday', checked: false },
+    { id: 1, weekDay: 'Monday', checked: false },
+    { id: 2, weekDay: 'Tuesday', checked: false },
+    { id: 3, weekDay: 'Wednesday', checked: false },
+    { id: 4, weekDay: 'Thursday', checked: false },
+    { id: 5, weekDay: 'Friday', checked: false },
+    { id: 6, weekDay: 'Saturday', checked: false }
   ];
 
-  var today = new Date();
+  var today = new Date(),
+      selectedDaysToFast = [],
   $scope.showCalculation = false;
   $scope.minDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
   
@@ -19,6 +20,7 @@ angular.module('makeupYourFast.controllers')
     var days = '';
     for (var i = 0, len = $scope.daysToFast.length; i < len; ++i) {
       if ($scope.daysToFast[i].checked) {
+        selectedDaysToFast.push($scop.daysToFast[i].id);
         days += $scope.daysToFast[i].weekDay + ', ';
       }
     }
@@ -65,8 +67,12 @@ angular.module('makeupYourFast.controllers')
   });
 
   $scope.buttonText = "Calculate";
-  $scope.calculateDateOfCompletion = function(model) {
-    
+  $scope.calculateDateOfCompletion = function() {
+    var currentDay = today,
+        currentDayOfWeek = currentDay.getDay(),
+        numberOfDaysToFast = $scope.daysToFast,
+        weekDaysToFast = selectedDaysToFast;
+
   };
 });
 
