@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Thu Aug 28 2014 23:51:40 GMT-0400 (EDT)
+// Generated on Sat Aug 30 2014 21:54:02 GMT-0400 (EDT)
 
 module.exports = function(config) {
   config.set({
@@ -16,14 +16,20 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'www/lib/ionic/js/ionic.bundle.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'www/lib/datePicker/js/angular-pickadate.js',
+      'www/js/services/*.js',
+      'www/js/controllers/mainController.js',
+      'www/js/controllers/*.js',
       'www/js/*.js',
-      'www/js/**/*.js',
-      'www/test/spec/services/**/*.js'
+      'www/test/spec/**/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
+    //'lib/ionic/js/angular/angular-animate.js',
+    //'lib/ionic/js/angular/angular-animate.min.js',
     ],
 
 

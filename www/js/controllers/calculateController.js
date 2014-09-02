@@ -1,32 +1,8 @@
 angular.module('makeupYourFast.controllers')
-.controller('calculateController', function($scope, $ionicModal) {
+.controller('calculateController', function($scope, $ionicModal, calculate) {
   
-  $scope.daysToFast = [
-    { id: 0, weekDay: 'Sunday', checked: false },
-    { id: 1, weekDay: 'Monday', checked: false },
-    { id: 2, weekDay: 'Tuesday', checked: false },
-    { id: 3, weekDay: 'Wednesday', checked: false },
-    { id: 4, weekDay: 'Thursday', checked: false },
-    { id: 5, weekDay: 'Friday', checked: false },
-    { id: 6, weekDay: 'Saturday', checked: false }
-  ];
-
-  var today = new Date(),
-      selectedDaysToFast = [],
-  $scope.showCalculation = false;
-  $scope.minDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-  
-  var computeSelectedDays = function() {
-    var days = '';
-    for (var i = 0, len = $scope.daysToFast.length; i < len; ++i) {
-      if ($scope.daysToFast[i].checked) {
-        selectedDaysToFast.push($scop.daysToFast[i].id);
-        days += $scope.daysToFast[i].weekDay + ', ';
-      }
-    }
-    $scope.daysToFastSelected =  days === '' ? undefined : days.substring(0, days.length - 2);
-  };
-
+  $scope.daysToFast = calculate.dayOfWeekModel;
+  $scope.minDate = calculate.getTodayAsString();
   $ionicModal.fromTemplateUrl('templates/datemodal.html', 
     function(modal) {
         $scope.datemodal = modal;
@@ -58,7 +34,7 @@ angular.module('makeupYourFast.controllers')
 
   $scope.closeDaysToFastModal = function() {
     $scope.daysToFastModal.hide();
-    computeSelectedDays();
+    $scope.daysToFastSelected = calculate.dayOfWeekSelected();
   };
 
   $scope.$on('$destroy', function() {
@@ -75,4 +51,3 @@ angular.module('makeupYourFast.controllers')
 
   };
 });
-
